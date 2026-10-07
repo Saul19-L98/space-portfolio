@@ -120,6 +120,8 @@ test("reduced motion still reaches a usable system view", async ({ page }) => {
 test("metadata and social tags are per planet", async ({ page }) => {
   await page.goto(u("/system/tdw-group/genai-assistant-platform"));
   await expect(page).toHaveTitle(/Multi-Tenant GenAI Assistant Platform — TDW-18/);
+  // The image must be an absolute URL with the base path exactly once, ending in og.png.
   const og = page.locator('meta[property="og:image"]');
-  await expect(og).toHaveAttribute("content", /opengraph-image/);
+  const escaped = BP.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  await expect(og).toHaveAttribute("content", new RegExp(`^https?://[^/]+${escaped}/og\\.png$`));
 });

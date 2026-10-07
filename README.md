@@ -62,7 +62,7 @@ Diagrams in `assets-src/diagrams/*.mmd` are rendered with `npm run render:diagra
 
 ## Deploy
 
-**GitHub Pages** (static export). `.github/workflows/pages.yml` builds with `NEXT_OUTPUT=export` under the Pages base path, publishes `out/` and smoke-tests the live URL with Playwright. One-time setup: Settings → Pages → Source: *GitHub Actions*, then set the repository variable `DEPLOY_PAGES=true` (the workflow is skipped until it is set). Pages on a private repository needs a paid plan; a public repository works on the free plan.
+**GitHub Pages** (static export). `.github/workflows/pages.yml` builds with `NEXT_OUTPUT=export` under the Pages base path, publishes `out/` and smoke-tests the live URL with Playwright. The social-preview image is the static `public/og.png` (static hosts serve generated image routes without a content type). One-time setup: Settings → Pages → Source: *GitHub Actions*, then set the repository variable `DEPLOY_PAGES=true` (the workflow is skipped until it is set). Pages on a private repository needs a paid plan; a public repository works on the free plan.
 
 Reproduce the Pages shape locally:
 

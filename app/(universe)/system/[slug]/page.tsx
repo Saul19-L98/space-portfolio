@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: system.name,
       description: system.summary,
       url: `/system/${system.slug}/`,
-      images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+      images: [{ url: "/og.png", width: 1200, height: 630 }],
     },
   };
 }

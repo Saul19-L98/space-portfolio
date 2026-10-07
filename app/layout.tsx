@@ -17,8 +17,9 @@ export const metadata: Metadata = {
   description,
   applicationName: "Space Portfolio",
   authors: [{ name: universe.profile.fullName, url: universe.profile.links.github }],
-  openGraph: { type: "website", siteName: universe.profile.name, title, description, url: "/" },
-  twitter: { card: "summary_large_image", title, description },
+  // A static PNG (not a generated route): static hosts serve it with an image content type.
+  openGraph: { type: "website", siteName: universe.profile.name, title, description, url: "/", images: [{ url: "/og.png", width: 1200, height: 630, alt: `${universe.profile.name} — ${universe.profile.headline}` }] },
+  twitter: { card: "summary_large_image", title, description, images: ["/og.png"] },
   robots: { index: true, follow: true },
 };
 
