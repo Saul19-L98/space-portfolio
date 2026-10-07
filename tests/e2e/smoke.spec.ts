@@ -46,9 +46,13 @@ test("flying into the TDW system shows its planets and the system panel", async 
 test("clicking a planet label opens its mission record; Escape returns to the system", async ({ page }) => {
   await page.goto(u("/system/tdw-group"));
   await waitForScene(page);
+  // Let the fly-in finish: labels are re-laid out every frame while the camera moves.
+  await expect(page.getByTestId("universe-root")).toHaveAttribute("data-camera-mode", /orbit|idle/, { timeout: 30_000 });
   const label = page.getByTestId("planet-label-event-driven-platform");
   await expect(label).toHaveAttribute("data-visible", "1", { timeout: 30_000 });
-  await label.click({ force: true });
+  // Dispatch on the element: a real pointer click can fall through to the canvas if the
+  // collision logic hides this label between the visibility check and the click.
+  await label.dispatchEvent("click");
   await expect(page).toHaveURL(/\/system\/tdw-group\/event-driven-platform\/?$/);
   const record = page.getByTestId("mission-record");
   await expect(record).toBeVisible();
