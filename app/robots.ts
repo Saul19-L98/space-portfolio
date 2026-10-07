@@ -1,6 +1,10 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/site";
 
-const base = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+// Required for `output: "export"`: rendered once at build time.
+export const dynamic = "force-static";
+
+const base = SITE_URL;
 
 export default function robots(): MetadataRoute.Robots {
   return { rules: { userAgent: "*", allow: "/" }, sitemap: `${base}/sitemap.xml` };

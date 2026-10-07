@@ -1,6 +1,8 @@
 import { ImageResponse } from "next/og";
 import { systems, universe } from "@/content";
 
+// Required for `output: "export"`: the image is rendered once at build time.
+export const dynamic = "force-static";
 export const alt = `${universe.profile.name} — ${universe.profile.headline}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

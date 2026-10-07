@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { Planet } from "@/content/schema";
+import { withBasePath } from "@/lib/site";
 import { formatDay, formatMonth, parseDate } from "@/lib/time";
 
 function formatEntryDate(d: string): string {
@@ -21,7 +22,7 @@ export function Timeline({ planet }: { planet: Planet }) {
             {t.image && (
               <figure className="timeline-figure">
                 <Image
-                  src={t.image.src}
+                  src={withBasePath(t.image.src)}
                   alt={t.image.alt}
                   width={t.image.width}
                   height={t.image.height}

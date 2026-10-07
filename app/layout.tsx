@@ -1,18 +1,18 @@
 import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { universe } from "@/content";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const display = Space_Grotesk({ variable: "--font-space-grotesk", subsets: ["latin"], display: "swap" });
 const mono = JetBrains_Mono({ variable: "--font-jetbrains-mono", subsets: ["latin"], display: "swap" });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 const title = `${universe.profile.name} — ${universe.profile.headline}`;
 const description =
   "A space-adventure portfolio: each employer is a star system, each project a planet with its own mission record. AWS platforms, Bedrock agents, data pipelines and computer vision.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(`${SITE_URL}/`),
   title: { default: title, template: `%s | ${universe.profile.name}` },
   description,
   applicationName: "Space Portfolio",

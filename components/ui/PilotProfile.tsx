@@ -2,13 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { universe } from "@/content";
 import { missionsPath } from "@/lib/routes";
+import { withBasePath } from "@/lib/site";
 
 export function PilotProfile() {
   const p = universe.profile;
   return (
     <article className="record" data-testid="pilot-profile">
       <header className="record-head flex items-start gap-4">
-        <Image src={p.photo.src} alt={p.photo.alt} width={96} height={128} className="pilot-photo" priority />
+        <Image src={withBasePath(p.photo.src)} alt={p.photo.alt} width={96} height={128} className="pilot-photo" priority />
         <div>
           <p className="record-code text-accent">PILOT RECORD</p>
           <h2 id="pilot-title" className="record-title" tabIndex={-1} data-panel-focus>

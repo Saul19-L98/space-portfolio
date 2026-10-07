@@ -21,7 +21,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title,
     description,
-    openGraph: { title, description, url: `/system/${slug}/${planet}`, images: [{ url: "/opengraph-image", width: 1200, height: 630 }] },
+    openGraph: {
+      title,
+      description,
+      url: `/system/${slug}/${planet}/`,
+      images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+    },
   };
 }
 

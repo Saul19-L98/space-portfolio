@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { DOMAIN_LABELS, STATUS_LABELS, chronologicalPlanets, systems, universe } from "@/content";
 import { planetPath, systemPath } from "@/lib/routes";
+import { withBasePath } from "@/lib/site";
 import { formatRange } from "@/lib/time";
 
 export const metadata: Metadata = {
@@ -15,7 +16,7 @@ export default function MissionsPage() {
   return (
     <main className="missions" data-testid="missions-index">
       <header className="missions-head">
-        <Image src={p.photo.src} alt={p.photo.alt} width={72} height={96} className="pilot-photo" priority />
+        <Image src={withBasePath(p.photo.src)} alt={p.photo.alt} width={72} height={96} className="pilot-photo" priority />
         <div>
           <p className="record-code text-accent">MISSION INDEX · TEXT MODE</p>
           <h1 className="font-display text-3xl font-semibold text-ink">{p.name}</h1>

@@ -60,6 +60,21 @@ Clients are anonymized by policy (`content/policy.ts`). `tests/unit/content-poli
 
 Diagrams in `assets-src/diagrams/*.mmd` are rendered with `npm run render:diagrams` (needs a Chromium; set `MMD_CHROME` if Playwright's is not installed).
 
+## Deploy
+
+**GitHub Pages** (static export). `.github/workflows/pages.yml` builds with `NEXT_OUTPUT=export` under the Pages base path, publishes `out/` and smoke-tests the live URL with Playwright. One-time setup: Settings → Pages → Source: *GitHub Actions*, then set the repository variable `DEPLOY_PAGES=true` (the workflow is skipped until it is set). Pages on a private repository needs a paid plan; a public repository works on the free plan.
+
+Reproduce the Pages shape locally:
+
+```bash
+NEXT_OUTPUT=export NEXT_PUBLIC_BASE_PATH=/space-portfolio \
+NEXT_PUBLIC_SITE_URL=https://saul19-l98.github.io/space-portfolio npm run build
+node scripts/serve-static.mjs out 3100 /space-portfolio
+BASE_URL=http://127.0.0.1:3100/space-portfolio npx playwright test
+```
+
+**Vercel / Node hosting**: no flags needed; `npm run build && npm run start` serves the same app at the domain root.
+
 ## How it is built
 
 - One persistent `<Canvas>` lives in the `(universe)` layout; routes only swap HTML panels. The URL is the single source of truth: `RouteSync` maps it to the store and performs navigation requested by the scene.

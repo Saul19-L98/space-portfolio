@@ -19,7 +19,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${system.name} — ${role.title}`,
     description: `${formatRange(system.roles[0].start, role.end)}. ${system.summary}`,
-    openGraph: { title: system.name, description: system.summary, url: `/system/${system.slug}`, images: [{ url: "/opengraph-image", width: 1200, height: 630 }] },
+    openGraph: {
+      title: system.name,
+      description: system.summary,
+      url: `/system/${system.slug}/`,
+      images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+    },
   };
 }
 

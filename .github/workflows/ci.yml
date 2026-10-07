@@ -29,6 +29,12 @@ jobs:
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
+      - name: Static export build check (GitHub Pages shape)
+        run: npm run build
+        env:
+          NEXT_OUTPUT: export
+          NEXT_PUBLIC_BASE_PATH: /space-portfolio
+          NEXT_PUBLIC_SITE_URL: https://saul19-l98.github.io/space-portfolio
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
