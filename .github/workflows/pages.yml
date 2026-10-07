@@ -59,17 +59,18 @@ jobs:
   smoke:
     needs: deploy
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 15
+    # Official Playwright image: browser and system libraries preinstalled, so no apt step
+    # (an apt mirror stall once held `playwright install --with-deps` for 19 minutes).
+    # Keep the tag in step with @playwright/test in package.json.
+    container:
+      image: mcr.microsoft.com/playwright:v1.61.1-noble
     env:
       CI: "true"
+      HOME: /root
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-          cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
       - name: Smoke-test the live site
         run: npx playwright test
         env:
