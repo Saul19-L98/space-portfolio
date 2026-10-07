@@ -4,6 +4,20 @@ A personal portfolio built as a space adventure: the visitor pilots a ship throu
 
 Inspired by NASA's *Eyes on the Solar System*.
 
+| Galaxy map | A star system (24 missions) |
+|---|---|
+| ![Galaxy map](docs/screenshots/galaxy.webp) | ![TDW Group system](docs/screenshots/system-tdw.webp) |
+
+| A planet with moons | A dim star with gas giants |
+|---|---|
+| ![GenAI platform planet](docs/screenshots/planet-genai.webp) | ![Dim star](docs/screenshots/system-dim.webp) |
+
+| Lava archetype | Pilot record |
+|---|---|
+| ![Lava planet](docs/screenshots/planet-lava.webp) | ![Pilot record](docs/screenshots/pilot.webp) |
+
+Screenshots were rendered headless with SwiftShader (software WebGL); a GPU adds bloom and higher noise detail.
+
 ## Stack
 
 - **Next.js 16** (App Router, Turbopack) · **React 19** · TypeScript
