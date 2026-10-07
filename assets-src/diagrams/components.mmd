@@ -1,0 +1,30 @@
+%%{init: {"theme":"base","themeVariables":{"primaryColor":"#101b2e","primaryBorderColor":"#4f8cff","primaryTextColor":"#e6edf7","secondaryColor":"#162238","tertiaryColor":"#0b1322","lineColor":"#8fa3c7","textColor":"#e6edf7","clusterBkg":"#0b1322","clusterBorder":"#2a3b5c","edgeLabelBackground":"#0b1322","fontSize":"16px","fontFamily":"DejaVu Sans, Verdana, sans-serif","actorBkg":"#101b2e","actorBorder":"#4f8cff","actorTextColor":"#e6edf7","actorLineColor":"#2a3b5c","signalColor":"#8fa3c7","signalTextColor":"#e6edf7","labelBoxBkgColor":"#101b2e","labelTextColor":"#e6edf7","noteBkgColor":"#162238","noteTextColor":"#e6edf7","sequenceNumberColor":"#0b1322"}}}%%
+flowchart TB
+  E([Employee<br/>web or mobile browser])
+  A([Administrator<br/>web browser])
+  subgraph AWS["AWS cloud (dedicated account, N. Virginia)"]
+    P["BI portal<br/>AWS Amplify"]
+    PN["Admin panel<br/>AWS Amplify"]
+    B["Engine (Laravel backend)<br/>AWS App Runner"]
+    DB[("Database<br/>PostgreSQL on RDS")]
+    C["Identity<br/>Amazon Cognito"]
+    X["Export service<br/>API Gateway + Lambda"]
+    S3[("Files<br/>Amazon S3")]
+  end
+  subgraph MS["Microsoft"]
+    EID["Entra ID<br/>corporate accounts"]
+    PBI["Power BI Service<br/>portal workspace"]
+  end
+  E --> P
+  A --> PN
+  P --> B
+  PN --> B
+  B --> DB
+  B <--> C
+  C <--> EID
+  B -- "embed token" --> PBI
+  P -- "embedded report" --> PBI
+  P -- "export data" --> X
+  X --> S3
+  style MS fill:#0b1322,stroke:#2a3b5c,color:#e6edf7
+  style AWS fill:#1a1408,stroke:#f59e0b,color:#e6edf7

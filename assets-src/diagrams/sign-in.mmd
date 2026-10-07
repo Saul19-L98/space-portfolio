@@ -1,0 +1,23 @@
+%%{init: {"theme":"base","themeVariables":{"primaryColor":"#101b2e","primaryBorderColor":"#4f8cff","primaryTextColor":"#e6edf7","secondaryColor":"#162238","tertiaryColor":"#0b1322","lineColor":"#8fa3c7","textColor":"#e6edf7","clusterBkg":"#0b1322","clusterBorder":"#2a3b5c","edgeLabelBackground":"#0b1322","fontSize":"16px","fontFamily":"DejaVu Sans, Verdana, sans-serif","actorBkg":"#101b2e","actorBorder":"#4f8cff","actorTextColor":"#e6edf7","actorLineColor":"#2a3b5c","signalColor":"#8fa3c7","signalTextColor":"#e6edf7","labelBoxBkgColor":"#101b2e","labelTextColor":"#e6edf7","noteBkgColor":"#162238","noteTextColor":"#e6edf7","sequenceNumberColor":"#0b1322"}}}%%
+sequenceDiagram
+  autonumber
+  participant U as Employee
+  participant P as BI portal
+  participant C as Amazon Cognito
+  participant M as Microsoft Entra ID
+  participant B as Engine (backend)
+  participant PB as Power BI
+  U->>P: Click "Sign in"
+  P->>C: Redirect to the sign-in page
+  C->>M: Authenticate with the corporate account
+  M-->>C: Identity verified (e-mail, name)
+  C-->>P: Temporary access token
+  P->>B: Request the user's menu (with the token)
+  B->>C: Verify the token and the account
+  B-->>P: Menu according to audiences
+  U->>P: Open a report
+  P->>B: Request the report address
+  B->>PB: Request / renew the embed token
+  PB-->>B: Valid token
+  B-->>P: Address + token + role filters
+  P-->>U: Show the embedded report
