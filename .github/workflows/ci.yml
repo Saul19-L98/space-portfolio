@@ -28,6 +28,7 @@ jobs:
       - run: npm test
       - run: npm run build
       - run: npx playwright install --with-deps chromium
+        timeout-minutes: 6
       - run: npm run test:e2e
       - name: Static export build (GitHub Pages shape)
         run: npm run build

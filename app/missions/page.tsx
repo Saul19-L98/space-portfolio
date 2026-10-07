@@ -6,9 +6,12 @@ import { planetPath, systemPath } from "@/lib/routes";
 import { withBasePath } from "@/lib/site";
 import { formatRange } from "@/lib/time";
 
+const description = "Every employer and project as plain text: the complete record behind the 3D universe.";
+
 export const metadata: Metadata = {
   title: "Mission index",
-  description: "Every employer and project as plain text: the complete record behind the 3D universe.",
+  description,
+  openGraph: { title: `Mission index — ${universe.profile.name}`, description, url: "/missions/", images: [{ url: "/og.png", width: 1200, height: 630 }] },
 };
 
 export default function MissionsPage() {
