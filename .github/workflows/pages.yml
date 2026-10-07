@@ -71,6 +71,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: npm ci
+      - name: Wait for the Pages edge to serve the new deployment
+        env:
+          BASE_URL: ${{ needs.deploy.outputs.page_url }}
+        run: |
+          for i in $(seq 1 30); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$BASE_URL")
+            if [ "$code" = "200" ]; then echo "ready after $i probe(s)"; exit 0; fi
+            sleep 10
+          done
+          echo "site not ready (last status $code)"; exit 1
       - name: Smoke-test the live site
         run: npx playwright test
         env:
